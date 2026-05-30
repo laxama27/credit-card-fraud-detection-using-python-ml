@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - Fraud Detection</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #141e30, #243b55);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+    }
+
+    .card {
+        background: #1b2738;
+        padding: 40px 30px;
+        border-radius: 15px;
+        width: 360px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    .subtitle {
+        margin: 10px 0 20px 0;
+        font-size: 14px;
+        color: #b0bec5;
+    }
+
+    .success {
+        background: #16a34a;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        display: none;
+    }
+
+    .error {
+        background: #dc2626;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 14px 15px 14px 45px;
+        border: none;
+        border-radius: 10px;
+        background: #2a3a4b;
+        color: #fff;
+    }
+
+    .input-group .icon {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    .signup-btn {
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+    }
+
+    .login-btn {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Create Account</h1>
+    <p class="subtitle">Secure signup for AI Fraud Detection</p>
+
+    <!-- ✅ SUCCESS MESSAGE (Flask Controlled) -->
+    {% if success %}
+    <div class="success" style="display:block;">
+        ✅ Account Created Successfully!
+    </div>
+    {% endif %}
+
+    <!-- ❌ ERROR MESSAGE -->
+    {% if error %}
+    <div class="error">
+        ❌ {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- 🔥 FORM (fixed - removed onsubmit) -->
+    <form method="POST" action="{{ url_for('signup') }}">
+
+        <div class="input-group">
+            <span class="icon">👤</span>
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn signup-btn">🚀 Signup</button>
+            <a href="{{ url_for('login') }}" class="btn login-btn">🔙 Back to Login</a>
+        </div>
+    </form>
+</div>
+
+<!-- ✅ OPTIONAL AUTO REDIRECT AFTER SUCCESS -->
+{% if success %}
+<script>
+setTimeout(() => {
+    window.location.href = "{{ url_for('login') }}";
+}, 2000);
+</script>
+{% endif %}
+
+</body>
+</html>
