@@ -75,8 +75,8 @@ def init_db():
 init_db()
 # ---------- EMAIL ----------
 def send_email(amount):
-    sender = "gudiyaprasad251@gmail.com"
-    password = "agpe bqvs ctoo rrjc"
+    sender = "gudiya@gmail.com"
+    password = "agpe abcd abcd rrjc"
     receiver = "yourgmail@gmail.com"
 
     try:
